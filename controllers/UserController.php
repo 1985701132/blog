@@ -6,7 +6,7 @@
         public function hello(){
             $user = new User;
             $name = $user->getName();
-            return view('user.hello',[
+            return view('user.user',[
                 'name'=>$name,
             ]);
         }

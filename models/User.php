@@ -1,6 +1,6 @@
 <?php
     namespace models;
-    class Usser{
+    class User{
         public function getName(){
             return 'hello';
         }
