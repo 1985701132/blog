@@ -11,7 +11,7 @@
         if($data){
             extract($data);
         }
-        require_once ROOT . 'views/' . str_replace('.','/',$file) . '.html';
+        require ROOT . 'views/' . str_replace('.','/',$file) . '.html';
     }
 
         if(isset($_SERVER['PATH_INFO']))
