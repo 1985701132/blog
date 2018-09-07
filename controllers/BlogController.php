@@ -6,6 +6,7 @@ use models\Blog;
         public function index(){
             $blog = new Blog;
             $data=$blog->search();
+            $blog->search();
             view('blog.index',$data);
         }
         public function content_to_html(){
@@ -14,7 +15,7 @@ use models\Blog;
             
             //开启缓冲区
             ob_start();
-
+                        
             //生成静态页
             foreach($data as $v){
                 view('blog.content',[
