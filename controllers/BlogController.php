@@ -31,5 +31,22 @@ use models\Blog;
 
         }
 
+        public function display()
+        {
+            // 接收日志ID
+            $id = (int)$_GET['id'];
+
+            $blog = new Blog;
+
+            echo $blog->getDisplay($id);
+
+        }
+
+        public function DisplayToDb()
+        {
+            $blog = new Blog;
+            $blog->getDisplayToDb();
+        }
+
     }
 ?>

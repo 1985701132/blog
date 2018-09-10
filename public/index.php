@@ -1,6 +1,8 @@
 <?php
     // 定义常量 根目录
     define('ROOT',dirname(__FILE__).'/../');
+
+    require(ROOT.'vendor/autoload.php');
     
     function autoLoadClass($class){
         require_once ROOT . str_replace('\\','/',$class) . '.php';
@@ -27,7 +29,17 @@
     $controller = "controllers\\{$controller}";
     $_C = new $controller;
     $_C->$action();
-
+    
+    function config($name)
+    {
+        static $config = null;
+        if($config === null)
+        {
+            // 引入配置文件 
+            $config = require(ROOT.'config.php');
+        }
+        return $config[$name];
+    }
     
 
 
