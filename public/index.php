@@ -16,6 +16,13 @@
         require ROOT . 'views/' . str_replace('.','/',$file) . '.html';
     }
 
+    if(php_sapi_name() == 'cli')
+    {
+        $controller = ucfirst($argv[1]) . 'Controller';
+        $action = $argv[2];
+    }
+    else
+    {
         if(isset($_SERVER['PATH_INFO']))
         {
             $pathInfo = explode('/',$_SERVER['PATH_INFO']);//explode() 函数把字符串打散为数组。
@@ -25,6 +32,9 @@
             $controller = 'IndexController';
             $action = 'index';
         }
+    }
+
+        
 
     $controller = "controllers\\{$controller}";
     $_C = new $controller;
