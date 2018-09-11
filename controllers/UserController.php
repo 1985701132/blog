@@ -3,6 +3,26 @@
     use models\User;
 
     class UserController{
+
+        public function dologin()
+        {
+            $email = $_POST['email'];
+            $password = md5($_POST['password']);
+
+            $user = new User;
+            $res = $user->login($email,$password);
+
+            if($res)
+            {
+                die('登录成功');
+            }
+            else
+            {
+                die('用户名或密码错误');
+            }
+
+        }
+
         public function register(){
             view('user.add');
         }
@@ -71,7 +91,7 @@
                 //转回数组
                 $data = json_decode($data,true);
                 //插入数据库
-                $user = new \models\User;
+                $user = new User;
                 $user->add($data['email'],$data['password']);
                 //跳转到登录页面
                 header('Location:/user/login');

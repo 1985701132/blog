@@ -8,6 +8,7 @@
             $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=blog','root','');
             $this->pdo->exec('SET NAMES utf8');
         }
+
         public function add($email,$password)
         {
             $stmt = $this->pdo->prepare("INSERT INTO users (email,password) VALUES(?,?)");
@@ -15,6 +16,17 @@
                 $email,
                 $password,
             ]);
+        }
+
+        public function login($email,$password)
+        {
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email=? AND password=?");
+            $stmt->execute([
+                $email,
+                $password,
+            ]);
+            $res = $stmt->fetch();
+            return $res;
         }
     }
 ?>
