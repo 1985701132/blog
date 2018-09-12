@@ -7,6 +7,8 @@
     <title>登录</title>
 </head>
 <body>
+    <?php view('common.nav') ?>
+
     <h1>登录</h1>
     <form action="/user/dologin" method="post">
         <div>
@@ -21,5 +23,8 @@
             <input type="submit" value="登录">
         </div>
     </form>
+
+    <?php view('common.footer') ?>
+
 </body>
 </html>

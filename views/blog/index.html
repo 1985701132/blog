@@ -8,7 +8,6 @@
     <style>
         .blog{
             width: 1400px;
-            height: 500px;
             margin: 0 auto;
         }
         .order_active{
@@ -22,6 +21,7 @@
     </style>
 </head>
 <body>
+    <?php view('common.nav') ?>
     <div class="blog">
         <form>
             关键字：
@@ -68,5 +68,6 @@
         </table>
         <?= $pageBtn?>
     </div>
+    <?php view('common.footer') ?>
 </body>
 </html>

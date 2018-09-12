@@ -11,9 +11,11 @@
 
             $user = new User;
             $res = $user->login($email,$password);
-
             if($res)
-            {
+            {   
+                $_SESSION['email'] = $res['email'];
+                $_SESSION['id'] = $res['id'];
+                header('Location:/blog/index');
                 die('登录成功');
             }
             else
@@ -104,6 +106,11 @@
         public function login()
         {
             view('user.login');
+        }
+        public function logout()
+        {
+            $_SESSION =[];
+            die('退出成功');
         }
     }
 ?>
