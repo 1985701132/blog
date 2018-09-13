@@ -10,7 +10,7 @@
             // 清空表，并且重置 ID
             $pdo->exec('TRUNCATE blogs');
 
-            for($i=0;$i<100;$i++)
+            for($i=0;$i<200;$i++)
             {
                 $title = $this->getChar( rand(20,100) ) ;
                 $content = $this->getChar( rand(100,600) );
@@ -19,11 +19,28 @@
                 $is_show = rand(0,1);
                 $date = rand(1233333399,1535592288);
                 $date = date('Y-m-d H:i:s', $date);
-                $pdo->exec("INSERT INTO blogs (title,content,display,is_show,created_at,short_content) VALUES('$title','$content',$display,$is_show,'$date','$short')");
+                $user_id = rand(1,20);
+                $pdo->exec("INSERT INTO blogs (title,content,display,is_show,created_at,short_content,user_id) VALUES('$title','$content',$display,$is_show,'$date','$short','$user_id')");
                 // print_r($pdo->errorInfo());
             }
 
         }
+
+        function user()
+        {
+            $pdo = new PDO('mysql:localhost=127.0.0.1;dbname=blog','root','');
+            $pdo->exec('set names utf8');
+            // 清空表，并且重置 ID
+            $pdo->exec('TRUNCATE users');
+            
+            for($i=0;$i<20;$i++)
+            {
+                $email = rand(100000,999999999999)."@qq.com";
+                $password = md5("12138");
+                $pdo->exec("INSERT INTO users (email,password) VALUES('$email','$password')");
+            }
+        }
+
         private function getChar($num)  // $num为生成汉字的数量
         {
             $b = '';

@@ -1,3 +1,4 @@
 /public/contents/
 /vendor/
-/logs/
+/views/logs/
+/public/simditor-2.3.6/

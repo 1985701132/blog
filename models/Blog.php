@@ -130,6 +130,18 @@ class Blog
         }
     }
 
+    public function create($title,$content,$is_show)
+    {
+        $stmt = $this->pdo->prepare("INSERT INTO blogs SET title = ? , content = ? , is_show = ? , user_id = ?");
+        return $stmt->execute([
+            $title,
+            $content,
+            $is_show,
+            $_SESSION['id'],
+        ]);
+
+    }
+
     
 
 

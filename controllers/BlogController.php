@@ -3,15 +3,37 @@ namespace controllers;
 use PDO;
 use models\Blog;
     class BlogController{
+        public function create()
+        {
+            view('blog.create');
+        }
+        public function store()
+        {
+            $title = $_POST['title'];
+            $content = $_POST['content'];
+            $is_show = $_POST['is_show'];
+
+            $blog = new Blog;
+            $res = $blog->create($title,$content,$is_show);
+            if($res)
+            {
+                header('Location:/blog/index');
+            }
+            else
+            {
+                header('Location:/blog/create');
+            }
+
+        }
         public function index(){
             $blog = new Blog;
             $data=$blog->search();
-            $blog->search();
             view('blog.index',$data);
         }
         public function content_to_html(){
             $blog = new Blog;
-            $data=$blog->search();
+            $stmt=$blog->pdo->query("SELECT * FROM blogs");
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             //开启缓冲区
             ob_start();
