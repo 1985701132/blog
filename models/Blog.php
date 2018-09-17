@@ -78,6 +78,8 @@ class Blog
         ];
     }
 
+
+
     public function getDisplay($id)
     {
         // 使用日志ID拼出键名
@@ -140,6 +142,13 @@ class Blog
             $_SESSION['id'],
         ]);
 
+    }
+
+    public function getNew()
+    {
+        $stmt = $this->pdo->query("SELECT * FROM blogs WHERE is_show = 1 ORDER BY id DESC limit 10");
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
 
     
