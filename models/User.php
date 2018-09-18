@@ -28,5 +28,14 @@
             $res = $stmt->fetch();
             return $res;
         }
+
+        public function setAvatar($path)
+        {
+            $stmt = $this->pdo->prepare('UPDATE users SET avatar=? WHERE id=?');
+            $stmt->execute([
+                $path,
+                $_SESSION['id']
+            ]);
+        }
     }
 ?>

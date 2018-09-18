@@ -15,6 +15,8 @@
             {   
                 $_SESSION['email'] = $res['email'];
                 $_SESSION['id'] = $res['id'];
+                $_SESSION['avatar'] = $res['avatar'];
+
                 header('Location:/blog/index');
                 die('登录成功');
             }
@@ -28,6 +30,7 @@
         public function register(){
             view('user.add');
         }
+
         public function store()
         {   
             //接收表单
@@ -112,5 +115,28 @@
             $_SESSION =[];
             die('退出成功');
         }
+
+        public function avatar()
+        {
+            view('user.avatar');
+        }
+
+        public function setavatar()
+        {
+            //上传新头像
+            $upload = \libs\Uploader::make();
+            $path = $upload->upload('avatar','avatar');
+
+            //保存到user表中
+            $model = new \models\User;
+            $model->setAvatar('/uploads/'.$path);
+
+            //删除原头像
+            @unlink(ROOT . 'public'.$_SESSION['avatar']);
+            //设置新头像
+            $_SESSION['avatar']='/uploads/'.$path;
+
+        }
+
     }
 ?>
