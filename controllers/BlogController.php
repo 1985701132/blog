@@ -16,7 +16,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
             $is_show = $_POST['is_show'];
 
             $blog = new Blog;
-            $res = $blog->create($title,$content,$is_show);
+            $res = $blog->create($title,$content,$is_show); 
             if($res)
             {
                 header('Location:/blog/index');
