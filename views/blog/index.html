@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +21,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php view('common.nav') ?>
     <div class="blog">
@@ -30,9 +32,12 @@
             <input type="text" name="start_date" value="<?=@$_GET['start_date']?>"> ~
             <input type="text" name="end_date" value="<?=@$_GET['end_date']?>">
             是否显示：
-            <input type="radio" name="is_show" value="" <?php if(!isset($_GET['is_show']) || $_GET['is_show']=="")echo 'checked' ?>> 全部
-            <input type="radio" name="is_show" value="0" <?php if(isset($_GET['is_show']) && $_GET['is_show']=="0")echo 'checked' ?>> 不显示
-            <input type="radio" name="is_show" value="1" <?php if(isset($_GET['is_show']) && $_GET['is_show']=="1")echo 'checked' ?>> 显示
+            <input type="radio" name="is_show" value="" <?php if(!isset($_GET['is_show']) || $_GET['is_show']=="" )echo
+                'checked' ?>> 全部
+            <input type="radio" name="is_show" value="0" <?php if(isset($_GET['is_show']) && $_GET['is_show']=="0"
+                )echo 'checked' ?>> 不显示
+            <input type="radio" name="is_show" value="1" <?php if(isset($_GET['is_show']) && $_GET['is_show']=="1"
+                )echo 'checked' ?>> 显示
             <input type="submit" value="搜索">
         </form>
         <table width="100%" border="1">
@@ -40,25 +45,40 @@
                 <th>ID</th>
                 <th>标题</th>
                 <th>发表日期
-                    <a href="?order_by=date&order_way=asc" <?php if(@$_GET['order_by']=='date' && $_GET['order_way']=='asc') echo "class='order_active'" ?>>☝︎</a>
-                    <a href="?order_by=date&order_way=desc" <?php if(@$_GET['order_by']=='date' && $_GET['order_way']=='desc') echo "class='order_active'" ?>>☟</a>
+                    <a href="?order_by=date&order_way=asc" <?php if(@$_GET['order_by']=='date' && $_GET['order_way']=='asc'
+                        ) echo "class='order_active'" ?>>☝︎</a>
+                    <a href="?order_by=date&order_way=desc" <?php if(@$_GET['order_by']=='date' && $_GET['order_way']=='desc'
+                        ) echo "class='order_active'" ?>>☟</a>
                 </th>
                 <th>修改日期</th>
                 <th>浏览量
-                    <a href="?order_by=display&order_way=asc" <?php if(@$_GET['order_by']=='display' && $_GET['order_way']=='asc') echo "class='order_active'" ?>>☝︎</a>
-                    <a href="?order_by=display&order_way=desc" <?php if(@$_GET['order_by']=='display' && $_GET['order_way']=='desc') echo "class='order_active'" ?>>☟</a>
+                    <a href="?order_by=display&order_way=asc" <?php if(@$_GET['order_by']=='display' &&
+                        $_GET['order_way']=='asc' ) echo "class='order_active'" ?>>☝︎</a>
+                    <a href="?order_by=display&order_way=desc" <?php if(@$_GET['order_by']=='display' &&
+                        $_GET['order_way']=='desc' ) echo "class='order_active'" ?>>☟</a>
                 </th>
                 <th>是否显示</th>
                 <th>操作</th>
             </tr>
-            <?php foreach($data as $v): ?>
+            <?php foreach($blogs['data'] as $v): ?>
             <tr>
-                <td><?=$v['id']?></td>
-                <td><a target="_blank" href="/contents/<?=$v['id']?>.html"><?=$v['title']?></a></td>
-                <td><?=$v['created_at']?></td>
-                <td><?=$v['updated_at']?></td>
-                <td><?=$v['display']?></td>
-                <td><?=$v['is_show']?></td>
+                <td>
+                    <?=$v['id']?>
+                </td>
+                <td><a target="_blank" href="/contents/<?=$v['id']?>.html">
+                        <?=$v['title']?></a></td>
+                <td>
+                    <?=$v['created_at']?>
+                </td>
+                <td>
+                    <?=$v['updated_at']?>
+                </td>
+                <td>
+                    <?=$v['display']?>
+                </td>
+                <td>
+                    <?=$v['is_show']?>
+                </td>
                 <td>
                     <a href="">编辑</a>
                     <a href="">删除</a>
@@ -66,8 +86,21 @@
             </tr>
             <?PHP endforeach; ?>
         </table>
-        <?= $pageBtn?>
+        <?= $blogs['pageBtn']?>
     </div>
+
+    <hr>
+    <h1>一周活跃用户</h1>
+    <ul>
+        <?php foreach($users as $v): ?>
+
+        <li>
+            <img size="50" height="50" src="<?=  $v['avatar'] ? $v['avatar'] : '/images/avatar.jpeg'   ?>" title="<?=$v['email']?>">
+        </li>
+
+        <?php endforeach; ?>
+    </ul>
     <?php view('common.footer') ?>
 </body>
+
 </html>

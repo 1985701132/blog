@@ -148,5 +148,11 @@
 
         }
 
+        public function setActiveUsers()
+        {
+            $user = new User;
+            $user->computeActiveUsers();
+        }
+
     }
 ?>

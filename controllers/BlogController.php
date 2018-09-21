@@ -27,11 +27,31 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
             }
 
         }
+
+        public function text()
+        {
+            $user = new \models\User;
+            $user->computeActiveUsers();
+        }
+
         public function index(){
             $blog = new Blog;
             $data=$blog->search();
-            view('blog.index',$data);
+
+            //获取最新日志
+            // $blog = new \models\Blog;
+            // $blogs = $blog->getNew();
+
+            //获取活跃用户
+            $user = new \models\User;
+            $users = $user->getActiveUsers();
+
+            view('blog.index',[
+                'blogs' => $data,
+                'users' => $users,
+            ]);
         }
+
         public function content_to_html(){
             $blog = new Blog;
             $stmt=$blog->pdo->query("SELECT * FROM blogs");
